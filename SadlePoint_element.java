@@ -2,7 +2,7 @@ package Array_exercise;
 
 import java.util.Scanner;
 
-public class SadlePoint_element {
+public class SadlePointElement {
 
 	public static void main(String args[]) {
 		
@@ -35,17 +35,42 @@ public class SadlePoint_element {
     	 }
     	 System.out.println();
      }
-     
+     boolean flag=true;
+     boolean found=true;
      // to find out smallest element in first row
      for(int i=0;i<row;i++) {
     	 
-    	int min=arr[i][0];
+    	int minvalue=arr[i][0];
+    	
+    	int mincolindex=0;
+    	
     	for(int j=0;j<col;j++) {
-    		if(min>arr[i][j]) {
-    			min=arr[i][j];
+    		
+    		if(arr[i][j]<minvalue) {
+    			minvalue=arr[i][j];
+    			mincolindex=j;
     		}
+    		
     	}
-    	 System.out.println(min); 	
-     }	
+    	boolean issaddlepoint=true;
+		
+    	//now in the same col check if it is max
+		for(int k=0;k<row;k++) {
+			if(arr[k][mincolindex]>minvalue) {
+				issaddlepoint=false;
+				break;
+			}
+		}
+		
+		if(issaddlepoint) {
+			System.out.println("saddle point found at index:"+i+","+mincolindex+" value"+" "+minvalue);
+			found=true;
+		}	
 	}
+	
+	
+	if(found == false) {
+		System.out.println("no saddle point in the matrix");
+	}
+  }
 }
